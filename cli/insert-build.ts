@@ -39,16 +39,16 @@ async function run():Promise<number> {
   try {
     const config: InsertConfig = JSON.parse(fs.readFileSync("ankh-bibliothek.json", "utf-8"))
 
-    process.env.MONGODB_URL ? (config.mongodbUrl = process.env.MONGODB_URL) : ""
-    process.env.REPO_USERNAME ? (config.repoUsername = process.env.REPO_USERNAME) : ""
-    process.env.REPO_PASSWORD ? (config.repoPassword = process.env.REPO_PASSWORD) : ""
-    process.env.PROJECT_NAME ? (config.projectName = process.env.PROJECT_NAME) : ""
-    process.env.PROJECT_FRIENDLY_NAME ? (config.projectFriendlyName = process.env.PROJECT_FRIENDLY_NAME) : ""
-    process.env.VERSION_GROUP_NAME ? (config.versionName = process.env.VERSION_GROUP_NAME) : ""
-    process.env.VERSION_NAME ? (config.versionName = process.env.VERSION_NAME) : ""
-    process.env.BUILD_NUMBER ? (config.buildNumber = parseInt(process.env.BUILD_NUMBER)) : ""
-    process.env.BUILD_CHANNEL ? (config.buildChannel = process.env.BUILD_CHANNEL as BuildChannel) : ""
-    process.env.REPOSITORY_PATH ? (config.repositoryPath = process.env.REPOSITORY_PATH) : ""
+    process.env.MONGODB_URL !== undefined ? (config.mongodbUrl = process.env.MONGODB_URL) : ""
+    process.env.REPO_USERNAME !== undefined ? (config.repoUsername = process.env.REPO_USERNAME) : ""
+    process.env.REPO_PASSWORD !== undefined ? (config.repoPassword = process.env.REPO_PASSWORD) : ""
+    process.env.PROJECT_NAME !== undefined ? (config.projectName = process.env.PROJECT_NAME) : ""
+    process.env.PROJECT_FRIENDLY_NAME !== undefined ? (config.projectFriendlyName = process.env.PROJECT_FRIENDLY_NAME) : ""
+    process.env.VERSION_GROUP_NAME !== undefined ? (config.versionName = process.env.VERSION_GROUP_NAME) : ""
+    process.env.VERSION_NAME !== undefined ? (config.versionName = process.env.VERSION_NAME) : ""
+    process.env.BUILD_NUMBER !== undefined ? (config.buildNumber = parseInt(process.env.BUILD_NUMBER)) : ""
+    process.env.BUILD_CHANNEL !== undefined ? (config.buildChannel = process.env.BUILD_CHANNEL as BuildChannel) : ""
+    process.env.REPOSITORY_PATH !== undefined ? (config.repositoryPath = process.env.REPOSITORY_PATH) : ""
 
     const downloadsPath = config.projectName + "/" + config.versionName + "/" + config.buildNumber
 
