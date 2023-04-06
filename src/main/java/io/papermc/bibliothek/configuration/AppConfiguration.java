@@ -34,7 +34,7 @@ import org.springframework.validation.annotation.Validated;
 public class AppConfiguration {
   private URL apiBaseUrl;
   private String apiTitle;
-  private @NotNull Path storagePath;
+  private @NotNull String storagePath;
 
   @SuppressWarnings("checkstyle:MethodName")
   public URL getApiBaseUrl() {
@@ -57,12 +57,12 @@ public class AppConfiguration {
   }
 
   @SuppressWarnings("checkstyle:MethodName")
-  public Path getStoragePath() {
+  public String getStoragePath() {
     return this.storagePath;
   }
 
   @SuppressWarnings("checkstyle:MethodName")
-  public void setStoragePath(final Path storagePath) {
+  public void setStoragePath(final String storagePath) {
     this.storagePath = storagePath;
   }
 }

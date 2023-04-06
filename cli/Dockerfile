@@ -1,0 +1,10 @@
+FROM node:19-slim
+WORKDIR /opt/ankh-bibliothek-uploader
+COPY insert-build.ts /opt/ankh-bibliothek-uploader/.
+COPY package.json /opt/ankh-bibliothek-uploader/.
+COPY tsconfig.json /opt/ankh-bibliothek-uploader/.
+RUN npm i && \
+    npx tsc && \
+    chmod +x insert-build.js && \
+    ln -s /opt/ankh-bibliothek-uploader/insert-build.js /usr/bin/insert-build
+ENTRYPOINT /usr/bin/insert-build

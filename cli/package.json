@@ -1,11 +1,11 @@
 {
-  "name": "ruler-cli",
-  "version": "1.0.0-SNAPSHOT",
-  "main": "insertBuild.js",
-  "license": "MIT",
+  "name": "ankh-bibliothek-uploader",
+  "devDependencies": {
+    "typescript": "^5.0.3"
+  },
   "dependencies": {
     "gitlog": "^4.0.4",
-    "mongodb": "^4.2.1",
-    "yargs": "^17.7.1"
+    "glob": "^9.3.4",
+    "mongodb": "^5.2.0"
   }
 }

@@ -43,8 +43,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.constraints.Pattern;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.net.URI;
 import java.time.Duration;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,12 +134,8 @@ public class DownloadController {
     for (final Map.Entry<String, Build.Download> download : build.downloads().entrySet()) {
       if (download.getValue().name().equals(downloadName)) {
         try {
-          return new JavaArchive(
-            this.configuration.getStoragePath()
-              .resolve(project.name())
-              .resolve(version.name())
-              .resolve(String.valueOf(build.number()))
-              .resolve(download.getValue().name()),
+          return new DownloadArchive(
+            this.configuration.getStoragePath() + project.name() + "/" + version.name() + "/" + build.number() + "/" + download.getValue().name(),
             CACHE
           );
         } catch (final IOException e) {
@@ -151,17 +146,18 @@ public class DownloadController {
     throw new DownloadNotFound();
   }
 
-  private static class JavaArchive extends ResponseEntity<FileSystemResource> {
-    JavaArchive(final Path path, final CacheControl cache) throws IOException {
-      super(new FileSystemResource(path), headersFor(path, cache), HttpStatus.OK);
+  private static class DownloadArchive extends ResponseEntity<FileSystemResource> {
+    DownloadArchive(final String path, final CacheControl cache) throws IOException {
+      super(headersFor(path, cache), HttpStatus.FOUND);
     }
 
-    private static HttpHeaders headersFor(final Path path, final CacheControl cache) throws IOException {
+    private static HttpHeaders headersFor(final String path, final CacheControl cache) throws IOException {
       final HttpHeaders headers = new HttpHeaders();
       headers.setCacheControl(cache);
-      headers.setContentDisposition(HTTP.attachmentDisposition(path.getFileName()));
-      headers.setContentType(HTTP.APPLICATION_JAVA_ARCHIVE);
-      headers.setLastModified(Files.getLastModifiedTime(path).toInstant());
+      headers.setLocation(URI.create(path));
+      // headers.setContentDisposition(HTTP.attachmentDisposition(path.getFileName()));
+      // headers.setContentType(HTTP.APPLICATION_JAVA_ARCHIVE);
+      // headers.setLastModified(Files.getLastModifiedTime(path).toInstant());
       return headers;
     }
   }
