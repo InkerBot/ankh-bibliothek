@@ -1,0 +1,31 @@
+{
+  "mongodbUrl": "mongodb://inkerbotnld-www:8009",
+  "repoUsername": "",
+  "repoPassword": "uKXS5DXjCIxIiKk9g1p7ZuEN3hdNQWEUzU5UluDWNiQ=",
+
+  "projectName": "ankhcore",
+  "projectFriendlyName": "Ankh Core",
+  "versionGroupName": "1.0",
+  "versionName": "1.0-SNAPSHOT",
+  "buildChannel": "DEFAULT",
+  "repositoryPath": ".",
+  "downloads": [
+    {
+      "type": "pluginJar",
+      "name": "jar",
+      "path": "build/libs/*.jar",
+      "glob": {
+        "ignore": [
+          "build/libs/*-sources.jar",
+          "build/libs/*-plain.jar",
+          "build/libs/*-javadoc.jar"
+        ]
+      }
+    },
+    {
+      "type": "sourceJar",
+      "name": "sources.jar",
+      "path": "build/libs/*-sources.jar"
+    }
+  ]
+}
